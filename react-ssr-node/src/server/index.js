@@ -1,11 +1,10 @@
 import '@babel/polyfill';
 import express from 'express';
 import React from 'react';
-import { matchRoutes } from 'react-router-config';
 import compression from 'compression';
 
 import renderer from './lib/renderer';
-import Routes from '../client/Routes';
+import { default as initialData } from './utils/data';
 
 const app = express();
 
@@ -28,10 +27,6 @@ const port = process.env.PORT || 3000;
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-    const initialData = {
-        name: 'Joel',
-        age: 22
-    }
     const context = {};
     const content = renderer(req, context, initialData);
 
